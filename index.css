@@ -1,0 +1,159 @@
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("Fonts/SF-Pro-Display-Bold.otf");
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("Fonts/SF-Pro-Display-Medium.otf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("Fonts/SF-Pro-Display-Regular.otf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "SF Pro Mono";
+  src: url("Fonts/SFMono-Bold.otf");
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "SF Pro Mono";
+  src: url("Fonts/SFMono-Medium.otf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "SF Pro Mono";
+  src: url("Fonts/SFMono-Regular.otf");
+  font-weight: 100;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "SF Pro Display";
+  /* transition: all 0.25s; */
+}
+
+body {
+  background-color: #eeeeee;
+  background-image: url("./465549.jpg");
+  background-size: cover;
+  /* background-image: cover; */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  /* height: 200vh; */
+}
+
+svg {
+  width: 32px;
+  height: 32px;
+  color: #000000;
+}
+
+.glassy {
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 32px;
+  /* box-shadow: rgba(0, 0, 0, 0.25) 0 4px 16px 0px; */
+}
+
+.glassy:active {
+  background-color: rgba(255, 255, 255, 0.75);
+  /* box-shadow: rgba(0, 0, 0, 0.05) 0 4px 16px 0px; */
+}
+
+.subElement.selected {
+  color: #ff0080;
+  position: relative;
+  z-index: 0;
+  /* transition: color 0.25s; */
+}
+.subElement.selected > svg {
+  color: #ff0080;
+  /* transition: color 0.25s; */
+}
+
+.subElement.selected::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: 56px;
+  border-radius: 28px;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: -1;
+}
+
+/* .subElement.selected:active::before {
+  background-color: rgba(255, 255, 255, 0.75);
+} */
+
+nav {
+  position: fixed;
+  bottom: 0px;
+  display: flex;
+  gap: 8px;
+  padding: 32px;
+  width: calc(100vw - 64px);
+  touch-action: none;
+}
+
+#buttons {
+  padding: 10px 24px;
+  /* padding: 10px 0px; */
+  display: flex;
+  justify-content: space-between;
+  /* justify-content: space-evenly; */
+  flex: 1 1 0;
+  touch-action: none;
+}
+
+.subElement {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.subElement > p {
+  font-size: 10px;
+}
+
+.subElement > p,
+.subElement > svg,
+.subElement.selected > svg,
+.subElement.selected {
+  transition: color 0.25s;
+}
+
+#button {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+#floating-rect {
+  will-change: transform, left, top;
+  /* transition: all 0.01s ease-in-out; */
+}
+
+#text {
+  margin: 32px;
+  padding: 32px;
+  /* font-size: 24px; */
+}
