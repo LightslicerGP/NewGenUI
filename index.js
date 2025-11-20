@@ -49,8 +49,8 @@ function updateFloatingRect(event) {
         const dist = minX - touch.clientX;
         squishX = dist <= 32 ? dist / 32 : 1;
         offsetX = -Math.min(dist / 2, 16);
-    } else if (touch.clientX > maxX + FLOATING_RECT_EXPANDED_WIDTH / 2) {
-        const dist = touch.clientX - (maxX + FLOATING_RECT_EXPANDED_WIDTH / 2);
+    } else if (touch.clientX > maxX + FLOATING_RECT_EXPANDED_WIDTH) {
+        const dist = touch.clientX - (maxX + FLOATING_RECT_EXPANDED_WIDTH);
         squishX = dist <= 32 ? dist / 32 : 1;
         offsetX = Math.min(dist / 2, 16);
     }
