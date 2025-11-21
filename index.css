@@ -131,7 +131,8 @@ nav {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  /* transform: translate(-50%, -50%); */
+  transform: translate(-50%, -50.5%); /* the bubble is in the right spot, but the div itselfg is slightyly higher than i thoguht, idk why but ok */
   height: 56px;
   border-radius: 28px;
   background-color: rgba(0, 0, 0, 0.1);
@@ -244,7 +245,24 @@ nav:not(:has(.action-btn)) .tab-bar:has(.tab-item:nth-child(2)):not(:has(.tab-it
      =             PAGE ELEMENTS                =
      ============================================ */
 
-body > :not(nav) {
+.text,
+#select-type,
+#install-btn {
   margin: 32px;
   padding: 32px;
+  border-radius: 48px;
+}
+
+#select-type {
+  display: flex;
+  gap: 32px;
+}
+
+#select-type button {
+  flex: 1 1 0;
+  border: none;
+  background-color: #0080ff;
+  color: #ffffff;
+  padding: 16px;
+  border-radius: 16px;
 }
