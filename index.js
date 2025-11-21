@@ -391,24 +391,50 @@ const types = [
    Tab Bar Type Selection Logic & Navigation
    ===================================================================== */
 let currentTypeIndex = 0;
-const nav = document.querySelector("nav");
+let nav = document.querySelector("nav");
 
 function showCurrentType() {
   console.log(currentTypeIndex)
   nav.innerHTML = types[currentTypeIndex];
 }
 
+// Tab bar type prev/next handlers
 document.getElementById("prev-btn").addEventListener("click", () => {
   currentTypeIndex = (currentTypeIndex - 1 + types.length) % types.length;
   showCurrentType();
 });
-
 document.getElementById("next-btn").addEventListener("click", () => {
   currentTypeIndex = (currentTypeIndex + 1) % types.length;
   showCurrentType();
 });
 
 document.addEventListener("DOMContentLoaded", showCurrentType);
+
+/* =====================================================================
+   Add or remove .compact class on <nav> based on scroll direction
+   ===================================================================== */
+let lastScrollY = window.scrollY;
+let compactNav = false;
+function handleNavCompactOnScroll() {
+  const newScrollY = window.scrollY;
+  if (!nav) nav = document.querySelector("nav");
+  if (!nav) return;
+  if (newScrollY > lastScrollY + 2) {
+    // Scrolled down
+    if (!compactNav) {
+      nav.classList.add("compact");
+      compactNav = true;
+    }
+  } else if (newScrollY < lastScrollY - 2) {
+    // Scrolled up
+    if (compactNav) {
+      nav.classList.remove("compact");
+      compactNav = false;
+    }
+  }
+  lastScrollY = newScrollY;
+}
+window.addEventListener("scroll", handleNavCompactOnScroll);
 
 /* =====================================================================
    Floating Rectangle Animation Settings & Calculation Helpers
@@ -459,9 +485,19 @@ function attachTabBarTouchListeners() {
     };
   }
 
+  function shouldEnableFloatingRect() {
+    if (!nav) nav = document.querySelector("nav");
+    if (!nav) return true;
+    return !nav.classList.contains("compact");
+  }
+
   function updateFloatingRect(event) {
     if (!isTouchActive || !floatingRect) return;
     if (!(event && event.touches && event.touches.length > 0)) return;
+    if (!shouldEnableFloatingRect()) {
+      floatingRect.style.display = "none";
+      return;
+    }
 
     const touch = event.touches[0];
     const tabBarRect = tabBar.getBoundingClientRect();
@@ -591,6 +627,19 @@ function attachTabBarTouchListeners() {
   }
 
   tabBar.addEventListener("touchstart", function (event) {
+    if (!shouldEnableFloatingRect()) {
+      // If nav is compact, don't activate floating div or interactive effect
+      isTouchActive = false;
+      allowTouchMove = false;
+      floatingRectCenter = { x: null, y: null };
+      touchStartSelectedIdx = -1;
+      lastFloatingRectState = null;
+      // If a floating-rect exists, hide it if visible
+      const fr = document.querySelector(".floating-rect");
+      if (fr) fr.style.display = "none";
+      return;
+    }
+
     isTouchActive = false;
     allowTouchMove = false;
     floatingRectCenter = { x: null, y: null };
@@ -670,6 +719,10 @@ function attachTabBarTouchListeners() {
 
   tabBar.addEventListener("touchmove", function (event) {
     if (!isTouchActive || !allowTouchMove) return;
+    if (!shouldEnableFloatingRect()) {
+      if (floatingRect) floatingRect.style.display = "none";
+      return;
+    }
     event.preventDefault();
     if (floatingRect && floatingRect.style.transition !== "") {
       floatingRect.style.transition = "";
@@ -679,6 +732,12 @@ function attachTabBarTouchListeners() {
 
   tabBar.addEventListener("touchend", function (event) {
     if (!isTouchActive) return;
+    if (!shouldEnableFloatingRect()) {
+      if (floatingRect) floatingRect.style.display = "none";
+      isTouchActive = false;
+      allowTouchMove = false;
+      return;
+    }
     event.preventDefault();
     if (
       floatingRect &&
@@ -726,10 +785,10 @@ function attachTabBarTouchListeners() {
           y >= rect.top &&
           y <= rect.bottom
         ) {
-          setTimeout(
-            () => el.classList.add("selected"),
-            FLOATING_RECT_TRANSITION_DURATION * 1000
-          );
+          setTimeout(() => {
+            // tabItems.forEach(tab => tab.classList.remove("selected"));
+            el.classList.add("selected");
+          }, FLOATING_RECT_TRANSITION_DURATION * 1000);
           selectedOrNearestEl = el;
           break;
         }
@@ -750,10 +809,10 @@ function attachTabBarTouchListeners() {
           }
         }
         if (nearestEl) {
-          setTimeout(
-            () => nearestEl.classList.add("selected"),
-            FLOATING_RECT_TRANSITION_DURATION * 1000
-          );
+          setTimeout(() => {
+            // tabItems.forEach(tab => tab.classList.remove("selected"));
+            nearestEl.classList.add("selected");
+          }, FLOATING_RECT_TRANSITION_DURATION * 1000);
           selectedOrNearestEl = nearestEl;
         }
       }
@@ -764,6 +823,12 @@ function attachTabBarTouchListeners() {
 
   tabBar.addEventListener("touchcancel", function (event) {
     if (!isTouchActive) return;
+    if (!shouldEnableFloatingRect()) {
+      if (floatingRect) floatingRect.style.display = "none";
+      isTouchActive = false;
+      allowTouchMove = false;
+      return;
+    }
     event.preventDefault();
     hideFloatingRectAndSlideToSelected(null);
   }, { passive: false });
@@ -774,7 +839,7 @@ function attachTabBarTouchListeners() {
    ===================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
   attachTabBarTouchListeners();
-  const nav = document.querySelector("nav");
+  nav = document.querySelector("nav");
   if (nav) {
     new MutationObserver(attachTabBarTouchListeners).observe(nav, {
       childList: true,

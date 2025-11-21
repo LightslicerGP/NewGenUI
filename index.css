@@ -68,7 +68,7 @@ svg {
   background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(8px);
   border-radius: 32px;
-  transition: background-color 0.1s;
+  transition: background-color 0.1s ease-in-out;
 }
 
 .glassy:active {
@@ -94,6 +94,7 @@ nav {
   display: flex;
   align-items: center;
   height: 64px;
+  transition: width 0.25s ease-in-out, height 0.25s ease-in-out, background-color 0.1s ease-in-out;
 }
 
 /* TAB ITEMS */
@@ -239,6 +240,31 @@ nav:not(:has(.action-btn)) .tab-bar:has(.tab-item:nth-child(2)):not(:has(.tab-it
   align-items: center;
   flex: 0 0 auto;
   margin-left: auto;
+  transition: width 0.25s ease-in-out, height 0.25s ease-in-out, background-color 0.1s ease-in-out;
+}
+
+nav.compact .tab-item:not(.selected),
+nav.compact .tab-item.selected::before,
+nav.compact .tab-item p {
+  display: none;
+  content: none;
+}
+
+nav.compact .tab-bar {
+  width: 48px !important;
+  height: 48px !important;
+  padding: 0 !important;
+  margin: 0 auto 0 0 !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 0 !important;
+  flex: none !important;
+}
+
+nav.compact .action-btn {
+  width: 48px !important;
+  height: 48px !important;
+  margin: 0 !important;
 }
 
 /* ============================================
