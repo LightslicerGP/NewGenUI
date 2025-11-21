@@ -1,162 +1,250 @@
+/* ============================================
+   =                 FONTS                    =
+   ============================================ */
 @font-face {
   font-family: "SF Pro Display";
-  src: url("Fonts/SF-Pro-Display-Bold.otf");
-  font-weight: 900;
+  src: url("Fonts/SF-Pro-Display-Regular.otf");
+  font-weight: 400;
 }
-
 @font-face {
   font-family: "SF Pro Display";
   src: url("Fonts/SF-Pro-Display-Medium.otf");
   font-weight: 500;
 }
-
 @font-face {
   font-family: "SF Pro Display";
-  src: url("Fonts/SF-Pro-Display-Regular.otf");
-  font-weight: 300;
-}
-
-@font-face {
-  font-family: "SF Pro Mono";
-  src: url("Fonts/SFMono-Bold.otf");
-  font-weight: 900;
-}
-
-@font-face {
-  font-family: "SF Pro Mono";
-  src: url("Fonts/SFMono-Medium.otf");
-  font-weight: 300;
+  src: url("Fonts/SF-Pro-Display-Bold.otf");
+  font-weight: 700;
 }
 
 @font-face {
   font-family: "SF Pro Mono";
   src: url("Fonts/SFMono-Regular.otf");
-  font-weight: 100;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "SF Pro Mono";
+  src: url("Fonts/SFMono-Medium.otf");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "SF Pro Mono";
+  src: url("Fonts/SFMono-Bold.otf");
+  font-weight: 700;
 }
 
+/* ============================================
+     =              GLOBAL RESET                =
+     ============================================ */
 * {
   margin: 0;
   padding: 0;
   font-family: "SF Pro Display";
-  /* transition: all 0.25s; */
 }
 
+/* ============================================
+     =                LAYOUT                     =
+     ============================================ */
 body {
   background-color: #eeeeee;
   background-image: url("./Background.jpg");
   background-size: cover;
-  /* background-image: cover; */
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  /* height: 200vh; */
   margin-bottom: 128px;
 }
 
 svg {
   width: 32px;
   height: 32px;
-  color: #000000;
+  color: #000;
 }
 
+/* ============================================
+     =            GLASSY COMPONENT              =
+     ============================================ */
 .glassy {
   background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(8px);
   border-radius: 32px;
-  /* box-shadow: rgba(0, 0, 0, 0.25) 0 4px 16px 0px; */
   transition: background-color 0.1s;
 }
 
 .glassy:active {
   background-color: rgba(255, 255, 255, 0.75);
-  /* box-shadow: rgba(0, 0, 0, 0.05) 0 4px 16px 0px; */
 }
 
-.subElement.selected {
+/* ============================================
+     =                NAV BAR                    =
+     ============================================ */
+
+nav {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  gap: 8px;
+  padding: 0 32px 32px 32px;
+  width: calc(100vw - 64px);
+  z-index: 1;
+}
+
+/* TAB BAR BASE */
+.tab-bar {
+  display: flex;
+  align-items: center;
+  height: 64px;
+}
+
+/* TAB ITEMS */
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 32px;
+}
+
+.tab-item > p {
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.tab-item > p,
+.tab-item > svg {
+  z-index: 3;
+}
+
+/* SELECTED ITEM (highlight sizing rules later) */
+.tab-item.selected {
   color: #ff0080;
   position: relative;
-  z-index: 2;
-  /* transition: color 0.25s; */
-}
-.subElement.selected > svg {
-  color: #ff0080;
-  /* transition: color 0.25s; */
 }
 
-.subElement.selected::before {
+.tab-item.selected > svg {
+  color: #ff0080;
+}
+
+/* BASE highlight shape; width updated by layout rules */
+.tab-item.selected::before {
   content: "";
   display: block;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 72px;
   height: 56px;
   border-radius: 28px;
   background-color: rgba(0, 0, 0, 0.1);
-  z-index: 1;
+  z-index: 2;
 }
 
-/* .subElement.selected:active::before {
-  background-color: rgba(255, 255, 255, 0.75);
-} */
+/* ============================================
+     TYPE 1 — NAV WITH ACTION BUTTON
+     ============================================ */
 
-nav {
-  position: fixed;
-  bottom: 0px;
-  display: flex;
-  gap: 8px;
-  padding: 0px 32px 32px 32px;
-  width: calc(100vw - 64px);
-  touch-action: none;
-  z-index: 1;
-}
-
-#buttons {
-  padding: 10px 24px;
-  /* padding: 10px 0px; */
-  display: flex;
+/* ---- 4 ITEMS ---- */
+nav:has(.action-btn) .tab-bar:has(.tab-item:nth-child(4)) {
+  flex: 1;
+  padding: 0 24px;
   justify-content: space-between;
-  /* justify-content: space-evenly; */
-  flex: 1 1 0;
-  touch-action: none;
 }
 
-.subElement {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Highlight size for padding 24 */
+nav:has(.action-btn) .tab-bar:has(.tab-item:nth-child(4)) .tab-item.selected::before {
+  width: 72px;
 }
 
-.subElement > p {
-  font-size: 10px;
+/* ---- 3 ITEMS ---- */
+nav:has(.action-btn) .tab-bar:has(.tab-item:nth-child(3)):not(:has(.tab-item:nth-child(4))) {
+  flex: 1;
+  padding: 0 32px;
+  justify-content: space-between;
 }
 
-.subElement > p,
-.subElement > svg,
-.subElement.selected > svg,
-.subElement.selected {
-  transition: color 0.25s;
+/* Highlight size for padding 32 */
+nav:has(.action-btn) .tab-bar:has(.tab-item:nth-child(3)):not(:has(.tab-item:nth-child(4))) .tab-item.selected::before {
+  width: 88px;
 }
 
-#button {
+/* ---- 2 ITEMS ---- */
+nav:has(.action-btn) .tab-bar:has(.tab-item:nth-child(2)):not(:has(.tab-item:nth-child(3))) {
+  flex: 0;
+  padding: 0 32px;
+  gap: 48px;
+}
+
+/* Highlight = 88px because padding = 32 */
+nav:has(.action-btn) .tab-bar:has(.tab-item:nth-child(2)):not(:has(.tab-item:nth-child(3))) .tab-item.selected::before {
+  width: 88px;
+}
+
+/* ============================================
+     TYPE 2 — NAV WITHOUT ACTION BUTTON
+     ============================================ */
+
+/* ---- 5 ITEMS ---- */
+nav:not(:has(.action-btn)) .tab-bar:has(.tab-item:nth-child(5)) {
+  flex: 1;
+  padding: 0 24px;
+  justify-content: space-between;
+}
+
+/* Highlight = 72 for padding 24 */
+nav:not(:has(.action-btn)) .tab-bar:has(.tab-item:nth-child(5)) .tab-item.selected::before {
+  width: 72px;
+}
+
+/* ---- 4 ITEMS ---- */
+nav:not(:has(.action-btn)) .tab-bar:has(.tab-item:nth-child(4)):not(:has(.tab-item:nth-child(5))) {
+  flex: 1;
+  padding: 0 32px;
+  justify-content: space-between;
+}
+
+/* Highlight = 88 for padding 32 */
+nav:not(:has(.action-btn)) .tab-bar:has(.tab-item:nth-child(4)):not(:has(.tab-item:nth-child(5))) .tab-item.selected::before {
+  width: 88px;
+}
+
+/* ---- 3 ITEMS ---- */
+nav:not(:has(.action-btn)) .tab-bar:has(.tab-item:nth-child(3)):not(:has(.tab-item:nth-child(4))) {
+  flex: 0;
+  padding: 0 32px;
+  gap: 48px;
+}
+
+/* Highlight = 88 */
+nav:not(:has(.action-btn)) .tab-bar:has(.tab-item:nth-child(3)):not(:has(.tab-item:nth-child(4))) .tab-item.selected::before {
+  width: 88px;
+}
+
+/* ---- 2 ITEMS ---- */
+nav:not(:has(.action-btn)) .tab-bar:has(.tab-item:nth-child(2)):not(:has(.tab-item:nth-child(3))) {
+  flex: 0;
+  padding: 0 32px;
+  gap: 48px;
+}
+
+/* Highlight = 88 */
+nav:not(:has(.action-btn)) .tab-bar:has(.tab-item:nth-child(2)):not(:has(.tab-item:nth-child(3))) .tab-item.selected::before {
+  width: 88px;
+}
+
+.action-btn {
   width: 64px;
   height: 64px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex: 0 0 auto;
+  margin-left: auto;
 }
 
-#floating-rect {
-  will-change: transform, left, top;
-  /* transition: all 0.01s ease-in-out; */
-}
+/* ============================================
+     =             PAGE ELEMENTS                =
+     ============================================ */
 
-#text,
-#install-btn {
+body > :not(nav) {
   margin: 32px;
   padding: 32px;
-  /* font-size: 24px; */
 }
