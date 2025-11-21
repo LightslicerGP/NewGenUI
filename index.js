@@ -467,6 +467,16 @@ function attachTabBarTouchListeners() {
   if (tabBar._touchListenersAttached) return;
   tabBar._touchListenersAttached = true;
 
+  tabBar.addEventListener('touchstart', function(event) {
+    if (!nav) nav = document.querySelector("nav");
+    if (nav && nav.classList.contains("compact")) {
+      nav.classList.remove("compact");
+      compactNav = false;
+      event.preventDefault();
+      return;
+    }
+  }, { passive: false });
+
   let isTouchActive = false;
   let floatingRect = null;
   let allowTouchMove = false;
