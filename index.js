@@ -467,7 +467,7 @@ function attachTabBarTouchListeners() {
   if (tabBar._touchListenersAttached) return;
   tabBar._touchListenersAttached = true;
 
-  tabBar.addEventListener('touchstart', function(event) {
+  tabBar.addEventListener('touchstart', function (event) {
     if (!nav) nav = document.querySelector("nav");
     if (nav && nav.classList.contains("compact")) {
       nav.classList.remove("compact");
@@ -683,7 +683,7 @@ function attachTabBarTouchListeners() {
         top: "0px",
         width: `${expandedWidth}px`,
         height: `${FLOATING_RECT_EXPANDED_HEIGHT}px`,
-        background: "rgba(0,0,0,0.1)",
+        background: "rgba(255,255,255,0.1)",
         borderRadius: "36px",
         pointerEvents: "none",
         zIndex: 1000,

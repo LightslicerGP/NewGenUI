@@ -174,9 +174,52 @@
       ac, cursus a neque.
     </p>
 
+
     <script src="index.js"></script>
     <script src="pwa.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>    <script>
+      fetch("https://raw.githubusercontent.com/naughtyduk/liquidGL/refs/heads/main/scripts/liquidGL.js")
+        .then((response) => response.text())
+        .then((js) => {
+          const script = document.createElement("script");
+          script.type = "text/javascript";
+          script.defer = true;
+          script.textContent = js;
+          document.body.appendChild(script);
+        });
+    </script>
     <script type="module">
+      document.addEventListener("DOMContentLoaded", () => {
+        const glassEffect = liquidGL(
+        {
+          snapshot: "body", // The area used for refraction, <body> recommended and default
+          target: ".liquidGL", // CSS selector for the element(s) to glass-ify
+          resolution: 3.0, // The quality of the snapshot
+          refraction: 0.01, // Base refraction strength (0–1)
+          bevelDepth: 0.02, // Intensity of the edge bevel (0–1)
+          bevelWidth: 0.1, // Width of the bevel as a proportion of the element (0–1)
+          frost: 0, // Subtle blur radius in px. 0 = crystal clear
+          shadow: true, // Adds a soft drop-shadow under the pane
+          specular: true, // Animated light highlights (slightly more GPU)
+          reveal: "fade", // Reveal animation
+          tilt: false, // Whether tilt on hover is enabled
+          tiltFactor: 5, // If tilt is enabled, how much tilt
+          magnify: 0.9, // Magnification of lens content
+          on: {
+            init(instance) {
+              // The `init` callback fires once liquidGL has taken its snapshot
+              // and rendered the first frame. It's the ideal place to hide or
+              // prepare elements for reveal animations (e.g. with GSAP, ScrollTrigger)
+              // because it ensures the content is visible to the snapshot before
+              // you hide it from the user.
+              console.log("liquidGL ready!", instance);
+            },
+          },
+        }
+        );
+      });
+    </script> -->
+    <!-- <script type="module">
       import { squircleObserver } from "https://esm.sh/corner-smoothing";
 
       window.applySquircles = function applySquircles() {
@@ -197,6 +240,6 @@
       };
 
       window.addEventListener("load", window.applySquircles);
-    </script>
+    </script> -->
   </body>
 </html>
