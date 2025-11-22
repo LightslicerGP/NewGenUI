@@ -683,7 +683,7 @@ function attachTabBarTouchListeners() {
         top: "0px",
         width: `${expandedWidth}px`,
         height: `${FLOATING_RECT_EXPANDED_HEIGHT}px`,
-        background: "rgba(255,255,255,0.1)",
+        background: "rgba(255,255,255,0.25)",
         borderRadius: "36px",
         pointerEvents: "none",
         zIndex: 1000,
