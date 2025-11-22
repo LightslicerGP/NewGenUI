@@ -40,6 +40,7 @@
   margin: 0;
   padding: 0;
   font-family: "SF Pro Display";
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* ============================================
@@ -53,6 +54,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   margin-bottom: 128px;
+  padding-top: env(safe-area-inset-top); /* iOS notch space */
 }
 
 svg {
@@ -113,6 +115,7 @@ nav {
 .tab-item > p,
 .tab-item > svg {
   z-index: 3;
+  transition: color 0.25s ease-in-out;
 }
 
 /* SELECTED ITEM (highlight sizing rules later) */
@@ -132,8 +135,8 @@ nav {
   position: absolute;
   left: 50%;
   top: 50%;
-  /* transform: translate(-50%, -50%); */
-  transform: translate(-50%, -50.5%); /* the bubble is in the right spot, but the div itselfg is slightyly higher than i thoguht, idk why but ok */
+  transform: translate(-50%, -50%);
+  /* nah, im just going crazy, mabye an optical balance issue idfk */
   height: 56px;
   border-radius: 28px;
   background-color: rgba(0, 0, 0, 0.1);

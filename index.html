@@ -7,9 +7,12 @@
 
     <link rel="shortcut icon" type="image/png" href="Icons/NewGenUI.png" />
     <link rel="manifest" href="manifest.json" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="transparent" />
     <meta name="description" content="An app to showcase a web version of new UI HUD's." />
     <link rel="stylesheet" href="index.css" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   </head>
 
   <body>
@@ -141,7 +144,7 @@
     <div id="install-btn" class="glassy">Install PWA</div>
 
     <p class="text glassy">
-      Sample Lorem Ipsum text to be able to scroll up and down for the compact or expanded view (coming soon!)
+      Sample Lorem Ipsum text to be able to scroll up and down for the compact or expanded view <s>(coming soon!)</s>
       <br />
       <br />
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel nunc non dui ultricies facilisis et quis magna. Nulla eu magna eleifend,
@@ -172,16 +175,15 @@
     </p>
 
     <script src="index.js"></script>
+    <script src="pwa.js"></script>
     <script type="module">
       import { squircleObserver } from "https://esm.sh/corner-smoothing";
 
       window.applySquircles = function applySquircles() {
         const allElements = document.querySelectorAll("*");
-
         allElements.forEach((el) => {
           const style = getComputedStyle(el);
           const radius = parseFloat(style.borderRadius);
-
           if (radius > 0) {
             squircleObserver(el, {
               cornerRadius: radius,
