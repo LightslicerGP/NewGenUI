@@ -284,14 +284,26 @@ nav.compact .action-btn {
 
 #select-type {
   display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#select-type-name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#select-type-buttons {
+  display: flex;
   gap: 32px;
 }
 
-#select-type button {
+#select-type-buttons button {
   flex: 1 1 0;
   border: none;
   background-color: #0080ff;
   color: #ffffff;
   padding: 16px;
   border-radius: 16px;
+  font-size: 16px;
 }

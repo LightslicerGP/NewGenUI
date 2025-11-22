@@ -2,8 +2,10 @@
 // Tab Bar UI Types - Different Variants for Tab Bar (with/without action button)
 // =====================================================================
 const types = [
-  // --- Tab bar with action button (full 4 tabs) ---
-  `
+  {
+    "4 Tabs with Action Button":
+      // --- Tab bar with action button (4 tabs) ---
+      `
       <div class="tab-bar glassy">
         <div class="tab-item selected">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -82,8 +84,10 @@ const types = [
           <path d="M21 21l-6 -6" />
         </svg>
       </div>`,
-  // --- Tab bar with action button (3 tabs) ---
-  `
+  }, {
+    "3 Tabs with Action Button":
+      // --- Tab bar with action button (3 tabs) ---
+      `
       <div class="tab-bar glassy">
         <div class="tab-item selected">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -139,8 +143,10 @@ const types = [
           <path d="M21 21l-6 -6" />
         </svg>
       </div>`,
-  // --- Tab bar with action button (2 tabs) ---
-  `
+  }, {
+    "2 Tabs with Action Button":
+      // --- Tab bar with action button (2 tabs) ---
+      `
       <div class="tab-bar glassy">
         <div class="tab-item selected">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -177,9 +183,10 @@ const types = [
           <path d="M21 21l-6 -6" />
         </svg>
       </div>`,
-  // ========== Tab bars WITHOUT action button ==========
-  // --- Tab bar without action button (5 tabs, includes "Search") ---
-  `      <div class="tab-bar glassy">
+  }, {
+    "5 Tabs without Action Button":
+      // --- Tab bar without action button (5 tabs) ---
+      `      <div class="tab-bar glassy">
         <div class="tab-item selected">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -258,8 +265,10 @@ const types = [
           <p>Search</p>
         </div>
       </div>`,
-  // --- Tab bar without action button (4 tabs) ---
-  `      <div class="tab-bar glassy">
+  }, {
+    "4 Tabs without Action Button":
+      // --- Tab bar without action button (4 tabs) ---
+      `      <div class="tab-bar glassy">
         <div class="tab-item selected">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -322,8 +331,10 @@ const types = [
           <p>Library</p>
         </div>
       </div>`,
-  // --- Tab bar without action button (3 tabs) ---
-  `      <div class="tab-bar glassy">
+  }, {
+    "3 Tabs without Action Button":
+      // --- Tab bar without action button (3 tabs) ---
+      `      <div class="tab-bar glassy">
         <div class="tab-item selected">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -363,8 +374,10 @@ const types = [
           <p>Radio</p>
         </div>
       </div>`,
-  // --- Tab bar without action button (2 tabs) ---
-  `      <div class="tab-bar glassy">
+  }, {
+    "2 Tabs without Action Button":
+      // --- Tab bar without action button (2 tabs) ---
+      `      <div class="tab-bar glassy">
         <div class="tab-item selected">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -384,7 +397,7 @@ const types = [
           </svg>
           <p>New</p>
         </div>
-      </div>`
+      </div>`}
 ]
 
 /* =====================================================================
@@ -392,10 +405,18 @@ const types = [
    ===================================================================== */
 let currentTypeIndex = 0;
 let nav = document.querySelector("nav");
+const selectTypeName = document.getElementById("select-type-name");
 
 function showCurrentType() {
-  console.log(currentTypeIndex)
-  nav.innerHTML = types[currentTypeIndex];
+  // Retrieve the current type object and its key/label
+  const typeObj = types[currentTypeIndex];
+  const key = Object.keys(typeObj)[0];
+  const html = typeObj[key];
+
+  nav.innerHTML = html;
+  if (selectTypeName) {
+    selectTypeName.textContent = key;
+  }
 }
 
 // Tab bar type prev/next handlers

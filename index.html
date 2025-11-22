@@ -123,7 +123,11 @@
     <p class="text glassy">
       I RECCOMEND VIEWING THIS ON MOBILE IN PORTRAIT!
       <br /><br />
-      Hey! I hope you enjoy messing around with this div thing.
+      Hey! I hope you enjoy messing around with this div thing. When iOS26 released, it showcased liquid glass, alongside a floating tab bar at the
+      bottom, with ways to have interactive nav items be at the bottom instead of the top for reachability, and soon after OneUI8 introduced a similar
+      looking floating tab bar at the bottom for some apps. So I decided to make it for the web, using glassmorphism instead of liquid glass (which
+      isnt well replicated for the web yet, either laggy or not accurate) and use a more frosted glass look. So enjoy messing around with the floating
+      tab bar!
       <br /><br />
       I know there are some issues, like it snapping to where your finger is, not using the original SF icons (I don't have a Mac and don't feel like
       emulating one, so I'm using Tabler icons instead for now), and sometimes you're able to get 2 or even 3 selected if you tap fast enough
@@ -137,8 +141,11 @@
     </p>
 
     <div id="select-type" class="glassy">
-      <button type="button" id="prev-btn">Previous</button>
-      <button type="button" id="next-btn">Next</button>
+      <p id="select-type-name">4 Tabs with Action Button</p>
+      <div id="select-type-buttons">
+        <button type="button" id="prev-btn">Previous</button>
+        <button type="button" id="next-btn">Next</button>
+      </div>
     </div>
 
     <div id="install-btn" class="glassy">Install PWA</div>
@@ -173,7 +180,6 @@
       blandit turpis. Praesent gravida est mi, quis luctus ligula rhoncus at. Nunc pulvinar efficitur ornare. Cras tortor quam, dapibus quis aliquam
       ac, cursus a neque.
     </p>
-
 
     <script src="index.js"></script>
     <script src="pwa.js"></script>
