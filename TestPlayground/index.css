@@ -1,0 +1,248 @@
+@font-face {
+    font-family: "SF Pro Display";
+    src: url("Fonts/SF-Pro-Display-Regular.otf");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "SF Pro Display";
+    src: url("Fonts/SF-Pro-Display-Medium.otf");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "SF Pro Display";
+    src: url("Fonts/SF-Pro-Display-Bold.otf");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "SF Pro Mono";
+    src: url("Fonts/SFMono-Regular.otf");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "SF Pro Mono";
+    src: url("Fonts/SFMono-Medium.otf");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "SF Pro Mono";
+    src: url("Fonts/SFMono-Bold.otf");
+    font-weight: 700;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "SF Pro Display";
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+body {
+    background-color: #F2F2F2;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin-bottom: 128px;
+    padding-top: env(safe-area-inset-top);
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #000000;
+    }
+}
+
+
+svg {
+    width: 32px;
+    height: 32px;
+}
+
+img {
+    width: calc(100vw - 32px);
+    border-radius: 48px;
+    margin: 16px 16px 0px 16px;
+}
+
+.glassy {
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(2px);
+    border-radius: 32px;
+    transition: background-color 0.5s ease-in-out;
+}
+
+.glassy:active {
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+
+nav.small {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    gap: 8px;
+    padding: 0 32px 32px 32px;
+    width: calc(100vw - 64px);
+    z-index: 1;
+    flex-wrap: wrap;
+}
+
+nav.small>.tab-bar {
+    display: flex;
+    align-items: center;
+    height: 64px;
+    padding: 0 8px;
+    flex: 1;
+    justify-content: flex-start;
+    gap: 0;
+    position: relative;
+}
+
+nav.small>.tab-bar>.tab-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1 0%;
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+nav.small>.tab-bar>.tab-item>p {
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+nav.small>.tab-bar>.tab-item#selected {
+    color: #ff0080;
+    position: relative;
+}
+
+nav.small>.tab-bar>.tab-item#selected>svg {
+    color: #ff0080;
+}
+
+nav.small>.tab-bar>.tab-item#selected::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 56px;
+    width: calc(100% - 8px);
+    border-radius: 28px;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+nav.small>.player {
+    order: -1;
+    width: calc(100vw - 64px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    gap: 8px;
+}
+
+nav.small>.player>img {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    margin: 0px;
+}
+
+nav.small>.player>.details {
+    flex: 1 1 0%;
+    min-width: 0;
+    height: 32px;
+    border-radius: 8px;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+nav.small>.player>.details>.title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+nav.small>.player>.details>.artist {
+    font-size: 12px;
+}
+
+nav.small>.action-btn {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 auto;
+    margin-left: auto;
+}
+
+
+
+nav.small.compact {
+    gap: minmax(8px, 1fr);
+}
+
+nav.small.compact>.tab-bar {
+    height: 48px;
+    width: 48px;
+    padding: 0;
+    flex: 0 0 auto;
+}
+
+/* nav.small.compact>.tab-bar>.tab-item {} */
+
+nav.small.compact>.tab-bar>.tab-item>p {
+    display: none;
+}
+
+nav.small.compact>.tab-bar>.tab-item:not(#selected) {
+    display: none;
+}
+
+/* nav.small.compact>.tab-bar>.tab-item#selected>svg {} */
+
+nav.small.compact>.tab-bar>.tab-item#selected::before {
+    display: none;
+}
+
+nav.small.compact>.player {
+    order: 0;
+    width: auto;
+    flex: 1 1 0%;
+}
+
+/* nav.small.compact>.player>img {} */
+
+/* nav.small.compact>.player>.details {} */
+
+/* nav.small.compact>.player>.details>.title {} */
+
+/* nav.small.compact>.player>.details>.artist {} */
+
+nav.small.compact>.action-btn {
+    height: 48px;
+    width: 48px;
+}
+
+
+
+
+
+
+nav.large {
+    display: none;
+}
