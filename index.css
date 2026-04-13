@@ -3,37 +3,37 @@
    ============================================ */
 @font-face {
   font-family: "SF Pro Display";
-  src: url("Fonts/SF-Pro-Display-Regular.otf");
+  src: url("/Fonts/SF-Pro-Display-Regular.otf");
   font-weight: 400;
 }
 
 @font-face {
   font-family: "SF Pro Display";
-  src: url("Fonts/SF-Pro-Display-Medium.otf");
+  src: url("/Fonts/SF-Pro-Display-Medium.otf");
   font-weight: 500;
 }
 
 @font-face {
   font-family: "SF Pro Display";
-  src: url("Fonts/SF-Pro-Display-Bold.otf");
+  src: url("/Fonts/SF-Pro-Display-Bold.otf");
   font-weight: 700;
 }
 
 @font-face {
   font-family: "SF Pro Mono";
-  src: url("Fonts/SFMono-Regular.otf");
+  src: url("/Fonts/SFMono-Regular.otf");
   font-weight: 400;
 }
 
 @font-face {
   font-family: "SF Pro Mono";
-  src: url("Fonts/SFMono-Medium.otf");
+  src: url("/Fonts/SFMono-Medium.otf");
   font-weight: 500;
 }
 
 @font-face {
   font-family: "SF Pro Mono";
-  src: url("Fonts/SFMono-Bold.otf");
+  src: url("/Fonts/SFMono-Bold.otf");
   font-weight: 700;
 }
 
