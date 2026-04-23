@@ -73,6 +73,7 @@ img {
 
 .glassy {
     background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 64px 0 rgba(0, 0, 0, 0.10);
     backdrop-filter: blur(2px);
     border-radius: 32px;
     transition: background-color 0.5s ease-in-out;
@@ -82,6 +83,13 @@ img {
     background-color: rgba(255, 255, 255, 0.75);
 }
 
+nav,
+nav * {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
 
 nav.small {
     position: fixed;
@@ -99,10 +107,15 @@ nav.small>.tab-bar {
     align-items: center;
     height: 64px;
     padding: 0 8px;
-    flex: 1;
+    flex: 1 1 0%;
+    max-width: max-content;
+    min-width: 0;
     justify-content: flex-start;
     gap: 0;
     position: relative;
+    /* max-width: 304px; */
+    /* at 475px viewport max width is 339px (-16 for padding), this was the calculated width, idk at what point the iPad does it but ok*/
+    /* nvm, im just gonna cap each tab bar item to 86px, so 86*4-8*3-(16) */
 }
 
 nav.small>.tab-bar>.tab-item {
@@ -112,6 +125,9 @@ nav.small>.tab-bar>.tab-item {
     flex: 1 1 0%;
     margin-left: -8px;
     margin-right: -8px;
+    width: 86px;
+    max-width: 86px;
+    min-width: 0;
 }
 
 nav.small>.tab-bar>.tab-item>p {
@@ -190,8 +206,6 @@ nav.small>.action-btn {
     margin-left: auto;
 }
 
-
-
 nav.small.compact {
     gap: minmax(8px, 1fr);
 }
@@ -203,7 +217,6 @@ nav.small.compact>.tab-bar {
     flex: 0 0 auto;
 }
 
-/* nav.small.compact>.tab-bar>.tab-item {} */
 
 nav.small.compact>.tab-bar>.tab-item>p {
     display: none;
@@ -213,7 +226,6 @@ nav.small.compact>.tab-bar>.tab-item:not(#selected) {
     display: none;
 }
 
-/* nav.small.compact>.tab-bar>.tab-item#selected>svg {} */
 
 nav.small.compact>.tab-bar>.tab-item#selected::before {
     display: none;
@@ -225,24 +237,21 @@ nav.small.compact>.player {
     flex: 1 1 0%;
 }
 
-/* nav.small.compact>.player>img {} */
-
-/* nav.small.compact>.player>.details {} */
-
-/* nav.small.compact>.player>.details>.title {} */
-
-/* nav.small.compact>.player>.details>.artist {} */
-
 nav.small.compact>.action-btn {
     height: 48px;
     width: 48px;
 }
 
-
-
-
-
-
 nav.large {
     display: none;
+}
+
+@media (min-width: 700px) {
+    nav.small {
+        display: none;
+    }
+
+    nav.large {
+        display: flex;
+    }
 }

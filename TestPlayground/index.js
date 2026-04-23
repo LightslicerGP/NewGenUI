@@ -1,36 +1,59 @@
-// Add/remove 'compact' class on scroll direction, always expand at page bottom
-let lastScrollY = window.scrollY || window.pageYOffset;
-let compactNavTimeout = null;
+let lastScrollY = window.scrollY || window.pageYOffset, compactNavTimeout = null;
+
+function getDocHeight() {
+    const d = document, b = d.body, e = d.documentElement;
+    return Math.max(b.scrollHeight, e.scrollHeight, b.offsetHeight, e.offsetHeight, b.clientHeight, e.clientHeight);
+}
 
 function handleCompactNav() {
     const nav = document.querySelector('nav.small');
     if (!nav) return;
 
-    const currentScrollY = window.scrollY || window.pageYOffset;
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    const docHeight = Math.max(
-        document.body.scrollHeight, document.documentElement.scrollHeight,
-        document.body.offsetHeight, document.documentElement.offsetHeight,
-        document.body.clientHeight, document.documentElement.clientHeight
-    );
-    const atBottom = Math.abs(currentScrollY + windowHeight - docHeight) < 4;
+    const y = window.scrollY || window.pageYOffset,
+        h = window.innerHeight || document.documentElement.clientHeight,
+        docH = getDocHeight();
+
+    const MAX_SCROLL_Y = Math.max(0, docH - h);
+    const atBottom = (y >= (MAX_SCROLL_Y - 8));
+
+    const clearCompactTimeout = () => {
+        if (compactNavTimeout) {
+            clearTimeout(compactNavTimeout);
+            compactNavTimeout = null;
+        }
+    };
 
     if (atBottom) {
-        // Always expand at the bottom
         nav.classList.remove('compact');
-    } else if (currentScrollY < lastScrollY - 4) {
-        // Scrolling up, expand
+        clearCompactTimeout();
+    } else if (y < lastScrollY - 4) {
         nav.classList.remove('compact');
-    } else if (currentScrollY > lastScrollY + 4) {
-        // Scrolling down, compact
-        if (compactNavTimeout) clearTimeout(compactNavTimeout);
-        compactNavTimeout = setTimeout(() => {
-            nav.classList.add('compact');
-        }, 50); // debounce for downwards scrolling
+        clearCompactTimeout();
+    } else if (y > lastScrollY + 4) {
+        clearCompactTimeout();
+        nav.classList.add('compact');
     }
-
-    lastScrollY = currentScrollY;
+    lastScrollY = y;
 }
 
-window.addEventListener('scroll', handleCompactNav);
+window.addEventListener('scroll', handleCompactNav, { passive: true });
+window.addEventListener('resize', handleCompactNav);
 window.addEventListener('load', handleCompactNav);
+
+document.addEventListener('DOMContentLoaded', function () {
+    const tabItems = document.querySelectorAll('.tab-bar .tab-item');
+    const nav = document.querySelector('nav.small');
+    tabItems.forEach(item => {
+        item.addEventListener('click', function () {
+            tabItems.forEach(tab => {
+                if (tab.id === 'selected') {
+                    tab.removeAttribute('id');
+                }
+            });
+            this.id = 'selected';
+            if (nav && nav.classList.contains('compact')) {
+                nav.classList.remove('compact');
+            }
+        });
+    });
+});
