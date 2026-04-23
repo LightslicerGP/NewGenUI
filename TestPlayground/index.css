@@ -100,6 +100,8 @@ nav.small {
     width: calc(100vw - 64px);
     z-index: 1;
     flex-wrap: wrap;
+    justify-content: center;
+    /* allows for no action button layout*/
 }
 
 nav.small>.tab-bar {
@@ -123,8 +125,8 @@ nav.small>.tab-bar>.tab-item {
     flex-direction: column;
     align-items: center;
     flex: 1 1 0%;
-    margin-left: -8px;
-    margin-right: -8px;
+    margin-left: -4px;
+    margin-right: -4px;
     width: 86px;
     max-width: 86px;
     min-width: 0;
@@ -152,7 +154,7 @@ nav.small>.tab-bar>.tab-item#selected::before {
     top: 50%;
     transform: translate(-50%, -50%);
     height: 56px;
-    width: calc(100% - 8px);
+    width: 100%;
     border-radius: 28px;
     background-color: rgba(0, 0, 0, 0.1);
     z-index: 2;
@@ -207,7 +209,8 @@ nav.small>.action-btn {
 }
 
 nav.small.compact {
-    gap: minmax(8px, 1fr);
+    gap: 8px;
+    justify-content: flex-start;
 }
 
 nav.small.compact>.tab-bar {
@@ -254,4 +257,12 @@ nav.large {
     nav.large {
         display: flex;
     }
+}
+
+.removed {
+    display: none !important;
+}
+
+.transparent {
+    opacity: 0 !important;
 }
