@@ -41,16 +41,37 @@ window.addEventListener('resize', handleCompactNav);
 window.addEventListener('load', handleCompactNav);
 
 document.addEventListener('DOMContentLoaded', function () {
-    const tabItems = document.querySelectorAll('.tab-bar .tab-item');
+    function getTabItems() {
+        const smallTabs = document.querySelectorAll('nav.small .tab-bar .tab-item');
+        const largeTabs = document.querySelectorAll('nav.large .tab-bar .tab-item');
+        return { smallTabs, largeTabs };
+    }
+
+    function getTabLabel(tabItem) {
+        const p = tabItem.querySelector('p');
+        return p ? p.innerText.trim() : '';
+    }
+
+    const { smallTabs, largeTabs } = getTabItems();
+    const allTabs = [...smallTabs, ...largeTabs];
     const nav = document.querySelector('nav.small');
-    tabItems.forEach(item => {
+
+    allTabs.forEach(item => {
         item.addEventListener('click', function () {
-            tabItems.forEach(tab => {
+            const label = getTabLabel(this);
+
+            allTabs.forEach(tab => {
                 if (tab.id === 'selected') {
                     tab.removeAttribute('id');
                 }
             });
-            this.id = 'selected';
+
+            allTabs.forEach(tab => {
+                if (getTabLabel(tab) === label) {
+                    tab.id = 'selected';
+                }
+            });
+
             if (nav && nav.classList.contains('compact')) {
                 nav.classList.remove('compact');
             }

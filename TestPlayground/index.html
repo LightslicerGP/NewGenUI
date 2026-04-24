@@ -10,6 +10,7 @@
     <meta name="theme-color" content="transparent" />
     <meta name="description" content="A test playground for the New Gen UI HUD." />
     <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="Navbar.css" />
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -117,7 +118,6 @@
     <nav class="large">
       <div class="tab-bar glassy">
         <svg
-          class="removed"
           id="nav-toggle"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -125,6 +125,7 @@
           stroke-width="1.5"
           stroke-linecap="round"
           stroke-linejoin="round"
+          style="transform: rotate(180deg)"
         >
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <path d="M3 6a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-12" />
@@ -143,7 +144,7 @@
           <p>Library</p>
         </div>
         <svg
-          id="search"
+          class="action-btn"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="none"
@@ -160,6 +161,6 @@
     </nav>
     <img src="https://www.iclarified.com/images/news/97554/465546/465546.jpg" />
     <img src="https://www.iclarified.com/images/news/97554/465549/465549.jpg" />
-    <script src="index.js"></script>
+    <script src="Navbar.js"></script>
   </body>
 </html>
