@@ -63,6 +63,33 @@ body {
     background-color: rgba(255, 255, 255, 0.75);
 }
 
+nav.small>.accessory-bar>img {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    margin: 0px;
+}
+
+nav.small>.accessory-bar>.details {
+    flex: 1 1 0%;
+    min-width: 0;
+    height: 32px;
+    border-radius: 8px;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+nav.small>.accessory-bar>.details>.title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+nav.small>.accessory-bar>.details>.artist {
+    font-size: 12px;
+}
 
 @media (prefers-color-scheme: dark) {
     body {
